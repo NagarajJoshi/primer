@@ -1,14 +1,11 @@
 FROM ubuntu:14.04
+FROM openjdk:8u131
 
 RUN \
   apt-get clean && apt-get update && apt-get install -y --no-install-recommends software-properties-common \
-  && add-apt-repository ppa:webupd8team/java \
-  && apt-get update \
-  && echo debconf shared/accepted-oracle-license-v1-1 select true |  debconf-set-selections \
-  && echo debconf shared/accepted-oracle-license-v1-1 seen true |  debconf-set-selections \
-  && apt-get install -y --no-install-recommends oracle-java8-installer curl
+  && apt-get update 
 
-RUN echo Asia/Kolkata | sudo tee /etc/timezone && sudo dpkg-reconfigure --frontend noninteractive tzdata
+RUN echo Asia/Kolkata |  tee /etc/timezone &&  dpkg-reconfigure --frontend noninteractive tzdata
 
 EXPOSE 8080
 EXPOSE 8081
